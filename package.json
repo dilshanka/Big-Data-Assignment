@@ -1,0 +1,17 @@
+{
+  "name": "kafka-order-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start-producer": "node producer/producer.js",
+    "start-consumer": "node consumer/consumer.js"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.1.0",
+    "@kafkajs/confluent-schema-registry": "^3.9.0",
+    "avro-schema-registry": "^1.0.0",
+    "kafkajs": "^2.2.4",
+    "uuid": "^9.0.1"
+  }
+}
