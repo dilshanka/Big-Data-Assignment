@@ -19,7 +19,7 @@ const run = async () => {
     
 
     await consumer.subscribe({ topic: 'orders-dlq', fromBeginning: true });
-    console.log("👷 Reprocessor started. Listening for failed messages...");
+    console.log(" Reprocessor started. Listening for failed messages...");
 
     const schemaPath = path.join(__dirname, '../schemas/order.avsc');
     const schema = fs.readFileSync(schemaPath, 'utf8');
@@ -34,9 +34,9 @@ const run = async () => {
                 
                 console.log(`\n[DLQ RECEIVED] Order: ${decodedValue.orderId}`);
                 console.log(`   Reason: ${errorReason}`);
-                console.log(`   Original Data: Product=${decodedValue.product}, Price=${decodedValue.price}`);
+                console.log(`  Original Data: Product=${decodedValue.product}, Price=${decodedValue.price}`);
 
-     
+                
                 const fixedPrice = Math.abs(decodedValue.price);
                 
                 const fixedOrder = {
@@ -44,7 +44,7 @@ const run = async () => {
                     price: fixedPrice
                 };
 
-                console.log(`   🛠️ FIXING: Converted price from $${decodedValue.price} to $${fixedOrder.price}`);
+                console.log(` Fixing: Converted price from $${decodedValue.price} to $${fixedOrder.price}`);
 
       
                 const encodedValue = await registry.encode(id, fixedOrder);
@@ -54,7 +54,7 @@ const run = async () => {
                     messages: [{ value: encodedValue }]
                 });
 
-                console.log(`   ✅ RESUBMITTED: Order ${fixedOrder.orderId} sent back to 'orders' queue.`);
+                console.log(`   Resubmitted: Order ${fixedOrder.orderId} sent back to 'orders' queue.`);
 
             } catch (e) {
                 console.error("Critical error in reprocessor:", e);

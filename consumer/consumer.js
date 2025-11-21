@@ -27,7 +27,7 @@ const run = async () => {
 
                 
                 if (decodedValue.price < 0) {
-                    throw new Error("INVALID_PRICE: Price cannot be negative");
+                    throw new Error("Price cannot be negative");
                 }
 
                 
@@ -37,7 +37,7 @@ const run = async () => {
 
                 console.log(`   Product: ${decodedValue.product}`);
                 console.log(`   Price: $${decodedValue.price}`);
-                console.log(`   >>> NEW RUNNING AVERAGE: $${average.toFixed(2)}`);
+                console.log(`   running average: $${average.toFixed(2)}`);
 
             } catch (error) {
                 
