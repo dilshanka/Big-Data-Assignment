@@ -60,8 +60,8 @@ const sendToDLQ = async (originalMessage, errorReason) => {
     await dlqProducer.send({
         topic: 'orders-dlq',
         messages: [{ 
-            value: originalMessage, // Send the raw bad data
-            headers: { 'error-reason': errorReason } // Add context
+            value: originalMessage, 
+            headers: { 'error-reason': errorReason } 
         }]
     });
     console.log("   [DLQ] Message moved to 'orders-dlq' topic.");
